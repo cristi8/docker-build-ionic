@@ -61,9 +61,13 @@ RUN npm i -g \
         grunt \
         phonegap
 
+# Build empty app so that gradle does the requirement downloads. Do the latest android ver and 6.4
 RUN cd /opt \
     && ionic start testApp blank --cordova --no-git --no-link \
     && cd testApp \
+    && ionic cordova build android \
+    && ionic cordova platform remove android \
+    && ionic cordova platform add android@6.4.0 \
     && ionic cordova build android \
     && cd /opt \
     && rm -rf testApp
